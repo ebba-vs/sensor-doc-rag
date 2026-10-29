@@ -26,7 +26,7 @@ context from **65 % to ~80 %** – mostly by fixing *retrieval*, not the prompt.
 | **Retrieval engineering** – dense, BM25 (implemented from scratch), Reciprocal Rank Fusion, Jev re-ranking, contextual chunk headers | `src/hybrid.py`, `src/rag.py`, `src/ingest.py` |
 | **Run comparison** – per-question diff of two runs, written to Markdown | `src/compare_runs.py` |
 | **Human feedback loop** – reviewer ratings logged as assessments on traces; low-confidence judge verdicts flagged `needs_review` | `src/feedback.py`, `src/jev_judge.py` |
-| **Serving strategy** – same eval set through API vs. self-hosted model; p50/p95 latency, $/1k queries, GPU break-even | `src/compare_serving.py` |
+| **Serving strategy** *(scaffolded, not yet run)* – script to run the eval set through an API vs. a self-hosted model and report p50/p95 latency and $/1k queries | `src/compare_serving.py` |
 | **Infra as code** – MLflow server on EC2, artifacts in S3 (optional) | `infra/main.tf` |
 
 ## Architecture
@@ -68,7 +68,7 @@ Spectrum-2 → Clarifi → Ox-Imager CS → OxyVu-1), 4 comparisons, 1 medical-a
 | `jev_context_recall` | Jev Noul per expected fact | share of answer-key facts present in the retrieved passages |
 
 Jev returns typed answers with calibrated probabilities in one parallel call, so all judges for
-an answer cost one request (~0.2 s). Noul thresholds follow TypeSafe's guidance (≥ 0.7 yes,
+an answer cost one request. Noul thresholds follow TypeSafe's guidance (≥ 0.7 yes,
 ≤ 0.3 no); values in between, and Choice/Score confidence < 0.5, are flagged `needs_review`.
 
 ## Results
@@ -136,8 +136,11 @@ referral → **v3 promoted**.
 - **Chunk headers** fixed a specific entity mix-up (Derma-2's camera had been reported as the
   Med-Hot camera from another document) but were neutral overall.
 
-_Fill in:_ avg. input tokens per query at top_k 4 vs 8, and the serving table from
-`compare_serving.py`.
+**Cost of better retrieval.** Going from top_k 4 to 8 roughly doubled the prompt: average input
+tokens per query rose from ≈766 to ≈1,514, and chunk headers added another ≈5 % (≈1,593).
+On a laptop (Llama 3.1 8B via Ollama, plus Jev re-ranking), the final configuration takes
+≈15 s per question in a sequential eval run (21 questions in 5:24) and ≈27 s for a single
+cold query from the CLI. Self-hosted, the marginal cost per query is zero; the price is latency.
 
 ## Lessons learned
 
@@ -152,8 +155,10 @@ _Fill in:_ avg. input tokens per query at top_k 4 vs 8, and the serving table fr
    prompt look worse than it was.
 5. **Retrieval components interact.** Chunk headers helped embeddings but hurt BM25 (generic words
    like "Thermal Camera" in every chunk boosted whole documents), so BM25 scores bodies only.
-6. **Small eval sets are noisy.** Near-identical answers got fact recall 0.5 in one run and 1.0 in
-   another. Treat ±0.05 as noise; repeat runs before trusting small deltas.
+6. **Know your noise before trusting small deltas.** Two identical runs of the final configuration
+   agreed exactly on fact recall (0.67), context recall (0.78), groundedness and refusal correctness;
+   only `concise` and `completeness` moved, by ≤ 0.05. Wording and citation numbers can still vary
+   between runs because Jev's re-ranking order shifts slightly for near-tied passages.
 7. **Measure the harness, not just the model.** A 3-minute "LLM latency" was MLflow evaluating in
    parallel against a single local Ollama instance – requests were queueing. Sequential eval fixed it.
 
@@ -169,6 +174,8 @@ _Fill in:_ avg. input tokens per query at top_k 4 vs 8, and the serving table fr
   relying on generic grounding/completeness judges.
 - **Routing:** `jev_judge.route()` (answer / decline-medical / out-of-scope) exists but is not yet in
   the serving path; it would skip retrieval + generation for ~10 % of questions.
+- **Serving comparison:** `compare_serving.py` is written but not yet run against a hosted API,
+  so there are no API cost/latency numbers yet.
 
 ## Quickstart
 
