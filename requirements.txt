@@ -1,0 +1,6 @@
+mlflow>=3.8
+openai>=1.40
+chromadb>=1.0
+pypdf>=4.0
+sentence-transformers>=3.0   # local embeddings (free); skip if EMBEDDINGS=openai
+typesafe-sdk                 # Jev judges / re-ranker (optional, needs TYPESAFE_API_KEY)

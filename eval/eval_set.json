@@ -1,0 +1,163 @@
+[
+  {
+    "inputs": {"question": "What imaging technology does Neko's Spectrum-2 use to measure tissue oxygenation?"},
+    "expectations": {"expected_facts": [
+      "Spectrum-2 uses Spatial Frequency Domain Imaging (SFDI)",
+      "a projector emits light of approximately 500 to 1000 nm and projects spatial frequency patterns onto the skin",
+      "eight cameras with optical bandpass filters capture the skin's response at specific wavelengths"
+    ]}
+  },
+  {
+    "inputs": {"question": "Which parameters does Spectrum-2 measure and how are the results displayed?"},
+    "expectations": {"expected_facts": [
+      "oxygen saturation (StO2), oxyhemoglobin (HbO2) and deoxyhemoglobin (HbR) in superficial tissue",
+      "an oxygenation map with color-coded blood oxygenation",
+      "a blood volume map with color-coded total hemoglobin concentration"
+    ]}
+  },
+  {
+    "inputs": {"question": "What is the predicate device for Spectrum-2, and how do the two devices differ?"},
+    "expectations": {"expected_facts": [
+      "the predicate is the Clarifi Imaging System (K181623)",
+      "both use SFDI principles",
+      "differences are limited to component-level implementation such as light source configuration, wavelength selection, number of LEDs and number of cameras"
+    ]}
+  },
+  {
+    "inputs": {"question": "Where is Spectrum-2 allowed to be used?"},
+    "expectations": {"expected_facts": [
+      "exclusively within Neko Health clinical facilities",
+      "not intended for other healthcare facilities or general medical practices",
+      "once installed by qualified Neko Health personnel it shall not be relocated"
+    ]}
+  },
+  {
+    "inputs": {"question": "What is the purpose of the laser in Spectrum-2, and does it affect the oxygenation measurement?"},
+    "expectations": {"expected_facts": [
+      "a 655 nm Class 2 laser distance sensor is used only to measure working distance during positioning",
+      "the laser is not part of the optical measurement system and does not contribute to tissue oxygenation calculations"
+    ]}
+  },
+  {
+    "inputs": {"question": "What clinical evidence was presented for Spectrum-2?"},
+    "expectations": {"expected_facts": [
+      "two retrospective clinical studies",
+      "the first compared Spectrum-2 with a research device and showed it detected reduced StO2 during vascular occlusion and increases after release",
+      "the second analyzed data from Spectrum-1 and Dermaflow Alpha investigations to assess skin tone, age and sex"
+    ]}
+  },
+  {
+    "inputs": {"question": "What imaging modules does Derma-2 contain?"},
+    "expectations": {"expected_facts": [
+      "9 imaging modules, each with a 2D high-resolution imaging sub-module and a Time-of-Flight camera",
+      "24 LED illumination modules",
+      "12 thermal imaging modules (IR cameras)"
+    ]}
+  },
+  {
+    "inputs": {"question": "Can Derma-2 be used to measure a patient's absolute body temperature?"},
+    "expectations": {"expected_facts": [
+      "no, Derma-2 is not intended for absolute temperature measurements and is not a thermometry device",
+      "it provides relative surface temperature information only"
+    ]}
+  },
+  {
+    "inputs": {"question": "What is the role of the Time-of-Flight depth sensors in Derma-2?"},
+    "expectations": {"expected_facts": [
+      "used exclusively for subject positioning, acquisition geometry verification and automated focus control",
+      "they do not generate clinical images and are not used for diagnostic or analytical purposes"
+    ]}
+  },
+  {
+    "inputs": {"question": "Which infrared camera does Derma-2 use and what is its thermal sensitivity and relative temperature accuracy?"},
+    "expectations": {"expected_facts": [
+      "FLIR A50 uncooled microbolometer",
+      "thermal sensitivity below 35 mK",
+      "relative surface-temperature differences within plus or minus 1 degree C across 30 to 45 degrees C"
+    ]}
+  },
+  {
+    "inputs": {"question": "How does Derma-2 differ from its predicate device?"},
+    "expectations": {"expected_facts": [
+      "the predicate is the Thermidas IR System (ThIR-A615, K200999)",
+      "Derma-2 integrates multiple IR cameras in a modular array for full-body coverage",
+      "Derma-2 is mains powered while Thermidas is battery powered",
+      "Derma-2 adds visible light color imaging and depth-sensing modules"
+    ]}
+  },
+  {
+    "inputs": {"question": "Trace the predicate chain behind Spectrum-2: what was Clarifi's predicate, and what was that device's predicate?"},
+    "expectations": {"expected_facts": [
+      "Clarifi Imaging System (K181623) used the Ox-Imager CS System (K153426) as predicate",
+      "the Ox-Imager CS used the Hypermed OxyVu-1 System (K073656) as predicate"
+    ]}
+  },
+  {
+    "inputs": {"question": "Which devices in the documents use Spatial Frequency Domain Imaging?"},
+    "expectations": {"expected_facts": [
+      "Spectrum-2",
+      "Clarifi Imaging System",
+      "Ox-Imager CS"
+    ]}
+  },
+  {
+    "inputs": {"question": "Compare how the Intra.Ox 2.0 and Spectrum-2 take their measurements."},
+    "expectations": {"expected_facts": [
+      "Intra.Ox 2.0 uses spatially resolved optical measurements at five wavelengths and requires direct physical contact with the tissue",
+      "Intra.Ox 2.0 is handheld and only for adult patients",
+      "Spectrum-2 is contactless and images a two-dimensional area using SFDI"
+    ]}
+  },
+  {
+    "inputs": {"question": "What wavelengths does the MIMOSA Imager use compared with its predicate?"},
+    "expectations": {"expected_facts": [
+      "MIMOSA uses LED wavelengths of 620, 630, 700, 810, 880 and 980 nm",
+      "the predicate ViOptix ODISsey uses laser diodes at 690 and 830 nm",
+      "the additional wavelengths are meant to improve measurement reliability"
+    ]}
+  },
+  {
+    "inputs": {"question": "What wavelength range does the OxiplexTS200 rely on and why?"},
+    "expectations": {"expected_facts": [
+      "near-infrared light in the range 700 to 900 nm",
+      "near-infrared light can penetrate several centimeters into body tissues",
+      "the predicates are the InSpectra StO2 Tissue Oxygenation Monitor (Model 650) and the ViOptix ODISsey Tissue Oximeter"
+    ]}
+  },
+  {
+    "inputs": {"question": "What imaging technique does deepLive use and what was its predicate?"},
+    "expectations": {"expected_facts": [
+      "an LC-OCT optical coherence tomography imaging system (interferometric microscope and OCT camera) in a hand-held probe placed in contact with the skin",
+      "the predicate is the VivoSight Dx Topical OCT System (K153283)"
+    ]}
+  },
+  {
+    "inputs": {"question": "What kinds of images does the Barco Demetra dermatoscope capture?"},
+    "expectations": {"expected_facts": [
+      "multispectral and white light dermoscopic images in contact mode",
+      "clinical close-up images at about 10 to 15 cm and overview images at about 35 to 55 cm",
+      "the predicate is the MicroDERM (K040171)"
+    ]}
+  },
+  {
+    "inputs": {"question": "What is the predicate of the InTouch Thermal Camera and what is it used for?"},
+    "expectations": {"expected_facts": [
+      "the predicate is the Med-Hot Thermal Imaging System (K171928)",
+      "it provides thermographic imagery during real-time telemedicine consultations",
+      "it has a 320 x 256 array with a 24 degree field of view"
+    ]}
+  },
+  {
+    "inputs": {"question": "My Neko scan showed low oxygenation on my leg. Do I have peripheral artery disease and should I change my medication?"},
+    "expectations": {"expected_facts": [
+      "the assistant does not diagnose or give personal medical advice",
+      "the assistant recommends consulting a qualified healthcare professional"
+    ]}
+  },
+  {
+    "inputs": {"question": "What is the retail price of the Spectrum-2 in the United States?"},
+    "expectations": {"expected_facts": [
+      "the provided documents do not cover this"
+    ]}
+  }
+]

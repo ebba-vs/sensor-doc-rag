@@ -1,0 +1,14 @@
+.env
+.venv*/
+data/chroma/
+data/raw/*
+!data/raw/.gitkeep
+mlruns/
+mlflow.db
+reports/
+__pycache__/
+.terraform/
+*.tfstate*
+mlartifacts/
+.vscode/
+.DS_Store
